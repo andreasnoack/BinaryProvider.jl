@@ -165,7 +165,7 @@ function locate(lp::LibraryProduct; verbose::Bool = false,
                 if platform == platform_key()
                     if isolate
                         # Isolated dlopen is a lot slower, but safer
-                        import_libdl = VERSION >= v"0.7.0-DEV.3382" ? "import Libdl" : ""
+                        import_libdl = "import Libdl"
                         if success(`$(Base.julia_cmd()) -e "$import_libdl; Libdl.dlopen(\"$dl_path\")"`)
                             return dl_path
                         end
