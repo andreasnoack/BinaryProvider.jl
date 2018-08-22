@@ -875,15 +875,7 @@ end
     end
 
     cd("LibFoo.jl") do
-        if VERSION < v"0.7-"
-            # Now, run `LibFoo.jl`'s tests, adding `LibFoo.jl` to the LOAD_PATH
-            # so that the tests can pick up the `LibFoo` module
-            withenv("JULIA_LOAD_PATH"=>joinpath(pwd(),"src")) do
-                run(`$(Base.julia_cmd()) $(color) test/runtests.jl`)
-            end
-        else
-            # On julia 0.7, we can now rely on Project.toml to set the load path
-            run(`$(Base.julia_cmd()) --project=$(pwd()) $(color) -e 'using Pkg; Pkg.test("LibFoo")'`)
-        end
+        # On julia 0.7, we can now rely on Project.toml to set the load path
+        run(`$(Base.julia_cmd()) --project=$(pwd()) $(color) -e 'using Pkg; Pkg.test("LibFoo")'`)
     end
 end
